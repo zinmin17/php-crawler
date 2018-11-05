@@ -31,8 +31,8 @@ class Crawler extends Controller
         //$mb = $this->mayBank->index();
         //return $mb;
         
-        //$bkb = $this->bangkokBank->index();
-        //return $bkb;
+        $bkb = $this->bangkokBank->index();
+        return $bkb;
         
         $vcb = $this->vietcomBank->index();
         return $vcb;

@@ -9,13 +9,12 @@ class MayBank extends Controller
 {
     public function __construct()
     {
-        
+        $this->url = 'https://www.maybank2u.com.my/maybank2u/malaysia/en/personal/rates/forex_rates.page';
     }
     
     public function index()
     {
-        $may_bank = 'https://www.maybank2u.com.my/maybank2u/malaysia/en/personal/rates/forex_rates.page';
-        $curl = curl_init($may_bank);
+        $curl = curl_init($this->url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
         $output = curl_exec($curl);
         curl_close($curl);
@@ -32,6 +31,7 @@ class MayBank extends Controller
         {
             $aDataTableHeaderHTML[] = trim($NodeHeader->textContent);
         }
+        //print_r($aDataTableHeaderHTML); die();
 
         //#Get row data/detail table without header name as key
         $i = 0;
@@ -42,6 +42,7 @@ class MayBank extends Controller
             $i = $i + 1;
             $j = $i % count($aDataTableHeaderHTML) == 0 ? $j + 1 : $j;
         }
+        //print_r($aDataTableDetailHTML); die();
 
         //#Get row data/detail table with header name as key and outer array index as row number
         for($i = 0; $i < count($aDataTableDetailHTML); $i++)
@@ -62,3 +63,5 @@ class MayBank extends Controller
 
     }
 }
+
+//https://www.codeproject.com/Tips/1074174/Simple-Way-to-Convert-HTML-Table-Data-into-PHP-Arr
